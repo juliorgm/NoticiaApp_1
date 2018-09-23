@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:defaultValue="@string/settings_num_noticias_default"
+        android:key="@string/settings_num_noticias_key"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="@string/settings_num_noticias_label"
+        android:inputType="number"/>
+    <ListPreference
+        android:defaultValue="@string/secao_todas_value"
+        android:entries="@array/secoes_label"
+        android:entryValues="@array/secoes_value"
+        android:key="@string/secao_key"
+        android:title="@string/secoes_preference" />
+</PreferenceScreen>

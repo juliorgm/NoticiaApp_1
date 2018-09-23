@@ -2,4 +2,42 @@
     <string name="app_name">NoticiaApp_1</string>
     <string name="no_internet_connection">Sem conexão com a internet</string>
     <string name="content_description_imagem">Image</string>
+    <string name="configurao_menu">Configurações</string>
+
+    <string name="settings_num_noticias_label">Número de Noticias</string>
+    <string name="settings_num_noticias_key" translatable="false">num_noticia</string>
+    <string name="settings_num_noticias_default" translatable="false">5</string>
+
+    <string-array name="secoes_label">
+        <item>@string/secao_todas_label</item>
+        <item>@string/lifeandstyle_label</item>
+        <item>@string/music_label</item>
+        <item>@string/money_label</item>
+    </string-array>
+
+    <string-array name="secoes_value">
+        <item>@string/secao_todas_value</item>
+        <item>@string/lifeandstyle_value</item>
+        <item>@string/music_value</item>
+        <item>@string/money_value</item>
+    </string-array>
+
+    <string name="lifeandstyle_label">Estilo de vida</string>
+    <string name="lifeandstyle_value">lifestyle</string>
+
+    <string name="money_label">Dineheiro</string>
+    <string name="money_value">money</string>
+
+    <string name="music_label">Música</string>
+    <string name="music_value">music</string>
+    <string name="secoes_preference">Escolher seção</string>
+    <string name="secao_key">secao_key</string>
+
+    <string name="secao_todas_value" />
+    <string name="secao_todas_label" >Todas</string>
+
+    <string name="resultado_0" >Não foi encontrado nenhum resultado para a pesquisa</string>
+    <string name="messagem_erro_pesquisa">Não foi encontrado nenhum regitro para essa pesquisa</string>
+    <string name="messagem_erro_rede">Houve um problema na rede ao conectar o servidor, por favor tente mais tarde</string>
+    <string name="voltar">Voltar</string>
 </resources>

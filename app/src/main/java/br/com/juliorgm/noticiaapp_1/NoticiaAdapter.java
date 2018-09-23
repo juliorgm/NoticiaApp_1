@@ -39,9 +39,9 @@ public class NoticiaAdapter extends RecyclerView.Adapter<NoticiaAdapter.ViewHold
         holder.mSecao.setText(noticia.getmSecao());
         holder.mAutor.setText(noticia.getmAutor());
         holder.mData.setText(noticia.getmData());
-        Glide.with(mContext).load(noticia.getThumbnail())
-                .into(holder.mThumbnail);
 
+        if (noticia.getThumbnail().equals("logo"))Glide.with(mContext).load(R.drawable.logo).into(holder.mThumbnail);
+        else Glide.with(mContext).load(noticia.getThumbnail()).into(holder.mThumbnail);
     }
 
     @Override

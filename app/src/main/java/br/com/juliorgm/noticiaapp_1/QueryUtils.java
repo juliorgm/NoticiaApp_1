@@ -80,7 +80,6 @@ class QueryUtils {
         List<Noticia> listaNoticia = new ArrayList<>();
 
         try {
-
             JSONObject baseJsonResponse = new JSONObject(stringJSON);
             JSONObject response = baseJsonResponse.getJSONObject("response");
             JSONArray resultsArray = response.getJSONArray("results");
@@ -93,7 +92,12 @@ class QueryUtils {
                 String secao = currentResults.getString("sectionName");
                 String data = currentResults.getString("webPublicationDate");
                 String url = currentResults.getString("webUrl");
-                String thumbnail = currentResults.getJSONObject("fields").getString("thumbnail");
+                String thumbnail= "logo";
+
+                if(currentResults.has("fields")){
+                    thumbnail = currentResults.getJSONObject("fields").getString("thumbnail");
+                }
+
                 JSONArray arrayAutor = currentResults.getJSONArray("tags");
                 String autor;
                 if (arrayAutor.length()!= 0) {

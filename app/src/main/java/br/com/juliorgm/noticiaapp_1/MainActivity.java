@@ -12,7 +12,10 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -22,11 +25,14 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
 
     private NoticiaAdapter mAdapter;
     private RecyclerView mRecyclerNoticias;
+    private TextView mTextError;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mTextError = findViewById(R.id.txtMensagemErro);
 
         mRecyclerNoticias = findViewById(R.id.recyclerNoticias);
         mRecyclerNoticias.setHasFixedSize(true);
@@ -39,7 +45,6 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
 
       initLoader();
       cliqueLista();
-
     }
 
     private void initLoader(){
@@ -50,7 +55,7 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
             loaderManager.initLoader(0, null, this);
         }catch (Exception e){
             Toast.makeText(this, getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
-            findViewById(R.id.recyclerNoticias).setVisibility(View.GONE);
+            alterarVisibilidadeViews(R.string.messagem_erro_rede);
         }
     }
 
@@ -75,14 +80,20 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
     public void onLoadFinished(Loader<List<Noticia>> loader, List<Noticia> data) {
         setupRecyclerAdapter(data);
         if(data == null) {
-            findViewById(R.id.recyclerNoticias).setVisibility(View.GONE);
-            //findViewById(R.id.painel_internet_connection_unavailable).setVisibility(View.VISIBLE);
-        } else {
-            findViewById(R.id.recyclerNoticias).setVisibility(View.VISIBLE);
-            //findViewById(R.id.painel_internet_connection_unavailable).setVisibility(View.GONE);
+            alterarVisibilidadeViews(R.string.messagem_erro_pesquisa);
+        }else if(data.size()==0){
+            alterarVisibilidadeViews(R.string.messagem_erro_pesquisa);
         }
+        else {
+            mRecyclerNoticias.setVisibility(View.VISIBLE);
+            mTextError.setVisibility(View.GONE);
+        }
+    }
 
-
+    private void alterarVisibilidadeViews(int messagem_erro_pesquisa) {
+        mRecyclerNoticias.setVisibility(View.GONE);
+        mTextError.setVisibility(View.VISIBLE);
+        mTextError.setText(messagem_erro_pesquisa);
     }
 
     @Override
@@ -103,4 +114,22 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Intent intent = new Intent(getApplicationContext(),SettingsActivity.class);
+                startActivity(intent);
+                return false;
+            }
+        });
+        return super.onOptionsItemSelected(item);
+    }
 }
